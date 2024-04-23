@@ -44,12 +44,13 @@ header > button {
   font-size: large;
 }
 #btn-all-books {
-  background-color: var(--clr-lightblue);
-  border: none;
-}
-#btn-favorites {
   border-color: var(--clr-red);
   background-color: white;
+}
+
+#btn-favorites {
+  border: transparent;
+  background-color: var(--clr-lightblue);
 }
 
 #book-container {
@@ -67,7 +68,7 @@ header > button {
   margin: 1.25rem;
 }
 
-.btn-fav {
+#single-book > button {
   padding: 0.25rem 0.75rem;
   margin: 0.25 0rem;
   border-radius: 4px;
@@ -76,8 +77,10 @@ header > button {
   background-color: white;
   font-weight: bold;
   margin-top: 0.75rem;
+  color: white;
+  background-color: var(--clr-red);
 }
-#single-book > h2 > a {
+#single-book > h2 {
   color: var(--clr-red);
   text-decoration: none;
 }
@@ -85,9 +88,4 @@ header > button {
 #single-book > p {
   color: var(--font-clr-light);
   margin-top: 0.5rem;
-}
-
-.favorite {
-  color: white;
-  background-color: var(--clr-red);
 }

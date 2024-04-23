@@ -1,22 +1,23 @@
 const bookContainer = document.getElementById("book-container");
 const btnAllBooks = document.getElementById("btn-all-books");
-const btnFavoriteBooks = document.getElementById("btn-favorites-books");
-const urlApi = "http://localhost:4730/books?_limit=6";
+const btnFavorites = document.getElementById("btn-favorites");
+const url = "http://localhost:4730/books?_limit=6";
 //#### state ####
 let state = {
   books: [],
 };
 //#### initial render ####
 getBooksFromApi();
+
 //#### functions ####
 function getBooksFromApi() {
-  fetch(urlApi)
+  fetch(url)
     .then((response) => response.json())
     .then((books) => {
       state.books = books;
       loadBooks();
     })
-    .catch((error) => alert.apply(error));
+    .catch((error) => alert(error));
 }
 //
 function loadBooks() {
@@ -36,8 +37,46 @@ function loadBooks() {
 
     bookAuthor.textContent = "von: " + book.author;
     btn.textContent = "Favorisieren";
+    btn.setAttribute("class", "btn-fav");
+    if (book.isFav == true) {
+      btn.classList.add("favorite");
+    }
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("favorite");
+      // send patch request to add key:value for favorite / isFav: true
+      if (book.isFav == false) {
+        fetch("http://localhost:4730/books/" + book.id, {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ isFav: true }),
+        })
+          .then(() => {
+            bookContainer.innerHTML = "";
+            getBooksFromApi();
+            console.log(book);
+          })
+          .catch((error) => window.alert(error));
+      } else {
+        fetch("http://localhost:4730/books/" + book.id, {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ isFav: false }),
+        })
+          .then(() => {
+            bookContainer.innerHTML = "";
+            getBooksFromApi();
+            console.log(book);
+          })
+          .catch((error) => window.alert(error));
+      }
+    });
     bookTitle.appendChild(bookLink);
     singleBook.append(bookTitle, bookAuthor, btn);
     bookContainer.append(singleBook);
   }
 }
+// eventListener
+btnFavorites.addEventListener("click", () => {
+  console.log("klick");
+  window.location.href = "http://127.0.0.1:5500/Favoriten";
+});

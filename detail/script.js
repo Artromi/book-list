@@ -3,6 +3,7 @@ const id = param.get("id");
 const bookContainer = document.getElementById("book-container");
 const urlApi = "http://localhost:4730/books/";
 const btnAllBooks = document.getElementById("btn-all-books");
+const btnFavorites = document.getElementById("btn-favorites");
 // state
 let singleBook = {};
 // initial call
@@ -41,4 +42,8 @@ function loadBook() {
 // eventListener
 btnAllBooks.addEventListener("click", () => {
   window.location.href = "http://127.0.0.1:5500/";
+});
+btnFavorites.addEventListener("click", () => {
+  console.log("klick");
+  window.location.href = "http://127.0.0.1:5500/Favoriten";
 });
