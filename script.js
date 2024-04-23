@@ -33,10 +33,7 @@ function loadBooks() {
       "href",
       "http://127.0.0.1:5500/detail/?id=" + book.id
     );
-    // bookLink.addEventListener("click", function (e) {
-    //   e.preventDefault();
-    //   console.log("this worked!");
-    // });
+
     bookAuthor.textContent = "von: " + book.author;
     btn.textContent = "Favorisieren";
     bookTitle.appendChild(bookLink);
@@ -44,5 +41,3 @@ function loadBooks() {
     bookContainer.append(singleBook);
   }
 }
-// let param = new URL(document.location).searchParams;
-// params.get("id");
