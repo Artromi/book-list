@@ -32,7 +32,7 @@ function loadBooks() {
     bookLink.textContent = book.title;
     bookLink.setAttribute(
       "href",
-      "http://127.0.0.1:5500/detail/?id=" + book.id
+      "http://127.0.0.1:5500/detail/book.html?id=" + book.id
     );
 
     bookAuthor.textContent = "von: " + book.author;
@@ -78,5 +78,5 @@ function loadBooks() {
 // eventListener
 btnFavorites.addEventListener("click", () => {
   console.log("klick");
-  window.location.href = "http://127.0.0.1:5500/Favoriten";
+  window.location.href = "http://127.0.0.1:5500/Favoriten/favorites.html";
 });
