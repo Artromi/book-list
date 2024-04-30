@@ -34,7 +34,11 @@ function loadBooks() {
     bookContainer.setAttribute("id", "single-book");
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
-    btn.textContent = "Favorisiert";
+    if (book.isFav == true) {
+      btn.textContent = "favorisiert";
+    } else {
+      btn.textContent = "favorisieren";
+    }
     bookContainer.append(bookTitle, bookAuthor, btn);
     main.append(bookContainer);
   }

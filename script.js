@@ -36,7 +36,12 @@ function loadBooks() {
     );
 
     bookAuthor.textContent = "von: " + book.author;
-    btn.textContent = "Favorisieren";
+    if (book.isFav == true) {
+      btn.textContent = "favorisiert";
+    } else {
+      btn.textContent = "favorisieren";
+    }
+
     btn.setAttribute("class", "btn-fav");
     if (book.isFav == true) {
       btn.classList.add("favorite");
