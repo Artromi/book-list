@@ -45,5 +45,5 @@ btnAllBooks.addEventListener("click", () => {
 });
 btnFavorites.addEventListener("click", () => {
   console.log("klick");
-  window.location.href = "http://127.0.0.1:5500/Favoriten";
+  window.location.href = "http://127.0.0.1:5500/Favoriten/favorites.html";
 });
