@@ -15,17 +15,19 @@ function getBooksFromApi() {
   fetch(url)
     .then((response) => response.json())
     .then((items) => {
-      // Filter favorite books
-      state.books = items.filter((book) => book.isFav && book.isFav === true);
+      state.books = items;
       loadBooks();
-      console.log(state.books);
     })
     .catch((error) => {
       console.error("Error fetching books:", error);
     });
 }
+
 function loadBooks() {
-  for (const book of state.books) {
+  main.innerHTML = "";
+  for (const book of state.books.filter(
+    (book) => book.isFav && book.isFav === true
+  )) {
     const bookContainer = document.createElement("div");
     const bookTitle = document.createElement("h2");
     const bookAuthor = document.createElement("p");
@@ -36,10 +38,30 @@ function loadBooks() {
     bookAuthor.textContent = book.author;
     if (book.isFav == true) {
       btn.textContent = "favorisiert";
+      btn.classList.add("favorite");
     } else {
       btn.textContent = "favorisieren";
     }
+    btn.setAttribute("class", "btn-fav");
+
+    btn.addEventListener("click", () => {
+      book.isFav = !book.isFav;
+      handleFavState(book);
+    });
     bookContainer.append(bookTitle, bookAuthor, btn);
     main.append(bookContainer);
   }
+}
+
+function handleFavState(book) {
+  fetch("http://localhost:4730/books/" + book.id, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ isFav: book.isFav }),
+  })
+    .then(() => {
+      getBooksFromApi();
+      console.log(book);
+    })
+    .catch((error) => window.alert(error));
 }

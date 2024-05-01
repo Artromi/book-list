@@ -48,7 +48,7 @@ function loadBooks() {
     }
     btn.addEventListener("click", () => {
       btn.classList.toggle("favorite");
-      // send patch request to add key:value for favorite / isFav: true
+
       if (book.isFav == false) {
         fetch("http://localhost:4730/books/" + book.id, {
           method: "PATCH",
@@ -58,7 +58,6 @@ function loadBooks() {
           .then(() => {
             bookContainer.innerHTML = "";
             getBooksFromApi();
-            console.log(book);
           })
           .catch((error) => window.alert(error));
       } else {
@@ -70,7 +69,6 @@ function loadBooks() {
           .then(() => {
             bookContainer.innerHTML = "";
             getBooksFromApi();
-            console.log(book);
           })
           .catch((error) => window.alert(error));
       }
@@ -82,6 +80,5 @@ function loadBooks() {
 }
 // eventListener
 btnFavorites.addEventListener("click", () => {
-  console.log("klick");
   window.location.href = "http://127.0.0.1:5500/Favoriten/favorites.html";
 });
